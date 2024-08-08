@@ -17,6 +17,8 @@ import {
 import { formatPrice } from "../utils/compute";
 
 function ProductPage({ products, addToCart, removeFromCart, cart = [] }) {
+    const [quantity, setQuantity] = useState(1);
+
     const { id } = useParams();
     const navigate = useNavigate();
     const product = products.find((p) => p.id === parseInt(id));
@@ -59,6 +61,10 @@ function ProductPage({ products, addToCart, removeFromCart, cart = [] }) {
 
     const handleCheckout = () => {
         navigate(`/checkout/${id}`);
+    };
+
+    const handleQuantityChange = (event) => {
+        setQuantity(event.target.value);
     };
 
     if (!product) {
@@ -108,7 +114,7 @@ function ProductPage({ products, addToCart, removeFromCart, cart = [] }) {
                         color="text.secondary"
                         gutterBottom
                     >
-                        {formatPrice(product.price)}
+                        {formatPrice(product.price * quantity)}
                     </Typography>
                     <Typography sx={{ mt: 2, mb: 4 }} paragraph>
                         {product.description}
@@ -119,12 +125,7 @@ function ProductPage({ products, addToCart, removeFromCart, cart = [] }) {
                         <Select
                             defaultValue={1}
                             label="Quantity"
-                            onChange={(e) =>
-                                console.log(
-                                    "Selected quantity:",
-                                    e.target.value
-                                )
-                            }
+                            onChange={handleQuantityChange}
                         >
                             {[1, 2, 3, 4, 5].map((num) => (
                                 <MenuItem key={num} value={num}>

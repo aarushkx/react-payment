@@ -5,6 +5,11 @@ import goldNecklaceImage from "../assets/gold_necklace.avif";
 import necklaceImage from "../assets/necklace.avif";
 import ringImage from "../assets/ring.avif";
 import silverChainImage from "../assets/silver_chain.avif";
+import trinityRingsImage from "../assets/trinity_rings.avif";
+import pearlNecklaceImage from "../assets/pearl_necklace.avif";
+import gildedLinksBraceletImage from "../assets/gilded_links_bracelet.avif";
+import pendantImage from "../assets/pendant.avif";
+import timelessGoldEarringsImage from "../assets/timeless_gold_earrings.avif";
 
 // 8 digit randomly generated id
 export const products = [
@@ -63,6 +68,46 @@ export const products = [
         image: silverChainImage,
         description:
             "Silver resonates with the moon—the celestial body that governs tides, emotions, and cycles. Just as the moon waxes and wanes, life unfolds in phases. A silver chain reminds us to embrace change, honor transitions, and find beauty in every phase.",
+    },
+    {
+        id: 45044007,
+        name: "Trinity Rings",
+        price: 138000,
+        image: trinityRingsImage,
+        description:
+            "Remarkably, the original Trinity rings had no embellishments—just the pure beauty of the bands.More than mere jewelry, the Trinity ring symbolizes unity and diversity—a timeless emblem that transcends trends and generations.",
+    },
+    {
+        id: 67905326,
+        name: "Timeless Gold Earrings",
+        price: 185000,
+        image: timelessGoldEarringsImage,
+        description:
+            "Sparkle and shine with these exquisite white gold pearl earrings. Their sophistication adds a touch of magic to any ensemble. Whether for everyday wear or a special evening, these stud earrings are the epitome of relaxed femininity.",
+    },
+    {
+        id: 33662966,
+        name: "Pearl Necklace",
+        price: 185000,
+        image: pearlNecklaceImage,
+        description:
+            "Behold the pearl necklace—a delicate string of celestial spheres. Its brilliance transcends fashion, evoking an untroubled loveliness. Like moonlight on water, pearls exude calmness and motherly energy—a testament to womanly wholesomeness.",
+    },
+    {
+        id: 27560496,
+        name: "Gilded Links Bracelet",
+        price: 370000,
+        image: gildedLinksBraceletImage,
+        description:
+            "Whether you’re a nature enthusiast or a connoisseur of finely crafted jewelry, this bracelet allows you to carry a piece of nature’s beauty wherever you go. The interconnected leaves in the bracelet create a narrative of unity and cohesion, mirroring the infinite cycles of nature. ",
+    },
+    {
+        id: 10453429,
+        name: "Pendant",
+        price: 155500,
+        image: pendantImage,
+        description:
+            "Multiple rows of graduated beads grace the metal frame of this elegant and contemporary basket pendant. The antique gold finish exudes timeless allure, while the frosted glass adds a touch of ethereal beauty.",
     },
     // Add more products as needed
 ];
