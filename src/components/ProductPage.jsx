@@ -1,7 +1,5 @@
-import { formatPrice } from "../utils/compute";
-
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
     Container,
     Typography,
@@ -16,19 +14,31 @@ import {
     Snackbar,
     Alert,
 } from "@mui/material";
+import { formatPrice } from "../utils/compute";
 
-function ProductPage({ products, addToCart }) {
+function ProductPage({ products, addToCart, removeFromCart, cart = [] }) {
     const { id } = useParams();
+    const navigate = useNavigate();
     const product = products.find((p) => p.id === parseInt(id));
 
-    // const [quantity, setQuantity] = useState(1);
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [addToCartDisabled, setAddToCartDisabled] = useState(false);
     const [buttonText, setButtonText] = useState("Add to Cart");
 
-    if (!product) {
-        return <Typography variant="h6">Product not found</Typography>;
-    }
+    useEffect(() => {
+        const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+        const productInCart = storedCart.find(
+            (item) => item.id === parseInt(id)
+        );
+
+        if (productInCart) {
+            setAddToCartDisabled(true);
+            setButtonText("Added to Cart");
+        } else {
+            setAddToCartDisabled(false);
+            setButtonText("Add to Cart");
+        }
+    }, [id]);
 
     const handleAddToCart = () => {
         addToCart(product);
@@ -37,13 +47,23 @@ function ProductPage({ products, addToCart }) {
         setOpenSnackbar(true);
     };
 
+    const handleRemoveFromCart = () => {
+        removeFromCart(product.id);
+        setButtonText("Add to Cart");
+        setAddToCartDisabled(false);
+    };
+
     const handleCloseSnackbar = () => {
         setOpenSnackbar(false);
     };
 
-    const handleQuantityChange = (event) => {
-        setQuantity(Number(event.target.value)); // Update quantity
+    const handleCheckout = () => {
+        navigate(`/checkout/${id}`);
     };
+
+    if (!product) {
+        return <Typography variant="h6">Product not found</Typography>;
+    }
 
     return (
         <Container
@@ -90,9 +110,11 @@ function ProductPage({ products, addToCart }) {
                     >
                         {formatPrice(product.price)}
                     </Typography>
-                    <Typography paragraph>{product.description}</Typography>
+                    <Typography sx={{ mt: 2, mb: 4 }} paragraph>
+                        {product.description}
+                    </Typography>
 
-                    <FormControl fullWidth sx={{ mb: 2 }}>
+                    <FormControl fullWidth sx={{ mb: 4 }}>
                         <InputLabel>Quantity</InputLabel>
                         <Select
                             defaultValue={1}
@@ -116,7 +138,11 @@ function ProductPage({ products, addToCart }) {
                         <Button
                             variant="outlined"
                             color="primary"
-                            onClick={handleAddToCart}
+                            onClick={
+                                addToCartDisabled
+                                    ? handleRemoveFromCart
+                                    : handleAddToCart
+                            }
                             disabled={addToCartDisabled}
                         >
                             {buttonText}
@@ -129,7 +155,7 @@ function ProductPage({ products, addToCart }) {
                                     boxShadow: "none",
                                 },
                             }}
-                            onClick={() => console.log("Buy Now clicked")}
+                            onClick={handleCheckout}
                         >
                             Buy Now
                         </Button>

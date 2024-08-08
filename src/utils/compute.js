@@ -4,3 +4,7 @@ export function formatPrice(price) {
         currency: "INR",
     }).format(price);
 }
+
+export function sortProductsByPriceHighToLow(products) {
+    return products.slice().sort((a, b) => b.price - a.price);
+}

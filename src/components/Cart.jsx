@@ -18,6 +18,10 @@ function Cart({ cart, removeFromCart, clearCart }) {
         navigate(`/product/${productId}`);
     };
 
+    const calculateTotalCost = () => {
+        return cart.reduce((total, item) => total + item.price, 0);
+    };
+
     return (
         <Container
             maxWidth="md"
@@ -27,9 +31,15 @@ function Cart({ cart, removeFromCart, clearCart }) {
                 alignItems: "center",
             }}
         >
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" sx={{ marginBottom: 4 }}>
                 Your Cart
             </Typography>
+            {cart.length > 0 && (
+                <Typography variant="h6" sx={{ marginBottom: 4 }}>
+                    Total Cost: {formatPrice(calculateTotalCost())}
+                </Typography>
+            )}
+
             <List
                 sx={{
                     width: "100%",
@@ -118,7 +128,7 @@ function Cart({ cart, removeFromCart, clearCart }) {
                     variant="contained"
                     onClick={clearCart}
                     sx={{
-                        mt: 4,
+                        m: 4,
                         boxShadow: "none",
                         "&:hover": {
                             boxShadow: "none",

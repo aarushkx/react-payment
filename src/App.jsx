@@ -1,26 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import ProductList from "./components/ProductList";
-import ProductPage from "./components/ProductPage";
-import Cart from "./components/Cart";
+import {
+    Navbar,
+    ProductList,
+    ProductPage,
+    Cart,
+    Checkout,
+    Popup,
+} from "./components";
 import { products } from "./data/productData";
 import { CssBaseline } from "@mui/material";
 
 function App() {
-    const [cart, setCart] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
 
-    function addToCart(product) {
-        setCart([...cart, product]);
-    }
+    useEffect(() => {
+        const hasSeenPopup = localStorage.getItem("hasSeenPopup");
+        if (!hasSeenPopup) {
+            setShowPopup(true);
+            localStorage.setItem("hasSeenPopup", "true");
+        }
+    }, []);
 
-    function removeFromCart(id) {
-        setCart(cart.filter((item) => item.id !== id));
-    }
+    const handleClosePopup = () => {
+        setShowPopup(false);
+    };
 
-    function clearCart() {
+    const [cart, setCart] = useState(() => {
+        // Load cart from localStorage on initial render
+        const savedCart = localStorage.getItem("cart");
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
+
+    const addToCart = useCallback(
+        (item) => {
+            if (!cart.find((cartItem) => cartItem.id === item.id)) {
+                const updatedCart = [...cart, item];
+                setCart(updatedCart);
+                localStorage.setItem("cart", JSON.stringify(updatedCart));
+            }
+        },
+        [cart]
+    );
+
+    const removeFromCart = useCallback(
+        (id) => {
+            const updatedCart = cart.filter((item) => item.id !== id);
+            setCart(updatedCart);
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+            localStorage.removeItem(`product_${id}_added`);
+        },
+        [cart]
+    );
+
+    const clearCart = useCallback(() => {
         setCart([]);
-    }
+        localStorage.removeItem("cart");
+    }, []);
 
     return (
         <Router>
@@ -48,7 +84,12 @@ function App() {
                         />
                     }
                 />
+                <Route
+                    path="/checkout/:id"
+                    element={<Checkout products={products} />}
+                />
             </Routes>
+            <Popup open={showPopup} onClose={handleClosePopup} />
         </Router>
     );
 }

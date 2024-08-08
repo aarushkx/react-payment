@@ -23,7 +23,7 @@ function Navbar() {
                             to="/"
                             style={{ color: "inherit", textDecoration: "none" }}
                         >
-                            Brand Name
+                            Brand
                         </Link>
                     </Typography>
                     <Button color="inherit">

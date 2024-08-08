@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { Container, Grid } from "@mui/material";
 import Heading from "./Heading";
+import { sortProductsByPriceHighToLow } from "../utils/compute";
 
 function ProductList({ products }) {
+    const [sortedProducts, setSortedProducts] = useState([]);
+
+    useEffect(() => {
+        const sorted = sortProductsByPriceHighToLow(products);
+        setSortedProducts(sorted);
+    }, [products]);
+
     return (
         <>
             <Heading />
@@ -25,7 +33,7 @@ function ProductList({ products }) {
                         width: "100%",
                     }}
                 >
-                    {products.map((product) => (
+                    {sortedProducts.map((product) => (
                         <Grid
                             item
                             key={product.id}
