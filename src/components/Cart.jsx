@@ -10,6 +10,7 @@ import {
     CardMedia,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { formatPrice } from "../utils/compute";
 
 function Cart({ cart, removeFromCart, clearCart }) {
     const navigate = useNavigate();
@@ -99,7 +100,7 @@ function Cart({ cart, removeFromCart, clearCart }) {
                                     marginRight: 2,
                                 }}
                             >
-                                <Typography variant="body1" noWrap>
+                                <Typography variant="body1">
                                     {item.name}
                                 </Typography>
                                 <Typography
@@ -140,13 +141,6 @@ function Cart({ cart, removeFromCart, clearCart }) {
             )}
         </Container>
     );
-}
-
-function formatPrice(price) {
-    return new Intl.NumberFormat("en-IN", {
-        style: "currency",
-        currency: "INR",
-    }).format(price);
 }
 
 export default Cart;

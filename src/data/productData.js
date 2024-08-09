@@ -1,15 +1,15 @@
-import braceletImage from "../assets/bracelet.avif";
-import earringsImage from "../assets/earrings.avif";
-import goldBraceletImage from "../assets/gold_bracelet.avif";
-import goldNecklaceImage from "../assets/gold_necklace.avif";
-import necklaceImage from "../assets/necklace.avif";
-import ringImage from "../assets/ring.avif";
-import silverChainImage from "../assets/silver_chain.avif";
-import trinityRingsImage from "../assets/trinity_rings.avif";
-import pearlNecklaceImage from "../assets/pearl_necklace.avif";
-import gildedLinksBraceletImage from "../assets/gilded_links_bracelet.avif";
-import pendantImage from "../assets/pendant.avif";
-import timelessGoldEarringsImage from "../assets/timeless_gold_earrings.avif";
+import braceletImage from "../assets/images/bracelet.avif";
+import earringsImage from "../assets/images/earrings.avif";
+import goldBraceletImage from "../assets/images/gold_bracelet.avif";
+import goldNecklaceImage from "../assets/images/gold_necklace.avif";
+import necklaceImage from "../assets/images/necklace.avif";
+import ringImage from "../assets/images/ring.avif";
+import silverChainImage from "../assets/images/silver_chain.avif";
+import trinityRingsImage from "../assets/images/trinity_rings.avif";
+import pearlNecklaceImage from "../assets/images/pearl_necklace.avif";
+import gildedLinksBraceletImage from "../assets/images/gilded_links_bracelet.avif";
+import pendantImage from "../assets/images/pendant.avif";
+import timelessGoldEarringsImage from "../assets/images/timeless_gold_earrings.avif";
 
 // 8 digit randomly generated id
 export const products = [
