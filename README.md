@@ -6,9 +6,7 @@ This is a React-based e-commerce application developed for learning purposes. It
 
 ## Preview
 
-<img src="public/preview/home.avif" width="200">
-<img src="public/preview/product.avif" width="200">
-<img src="public/preview/cart.avif" width="200">
+<img src="public/preview/home.avif" width="200"> <img src="public/preview/product.avif" width="200"> <img src="public/preview/cart.avif" width="200">
 
 ## View Live
 
